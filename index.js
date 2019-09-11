@@ -1,12 +1,11 @@
 var fluent = require("@fluent/bundle");
 var fs = require("fs");
 
-exports.fluent = function (key, options) {
+var getMessage = function (key, options) {
   options = options || {};
   options.hash = options.hash || {};
 
   var language, ftl, result;
-
   if (typeof key !== "string") {
     throw "{{fluent}} helper: invalid key. Keys must be formatted as strings.";
   }
@@ -43,3 +42,11 @@ exports.fluent = function (key, options) {
     throw "{{fluent}} helper: translation for '" + key + "' is not available for language '" + language + "'.";
   }
 };
+
+var hbfluent = function () {};
+
+hbfluent.register = function(Handlebars) {
+  Handlebars.registerHelper('fluent', getMessage);
+};
+
+module.exports = hbfluent;
