@@ -1,0 +1,35 @@
+{
+  "name": "handlebars-helper-fluent",
+  "version": "0.0.1",
+  "description": "Fluent based i18n helper for Handlebars",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alerque/handlebars-helper-fluent.git"
+  },
+  "keywords": [
+    "handlebars",
+    "helper",
+    "i18n",
+    "internationalize",
+    "lang",
+    "language",
+    "languages",
+    "local",
+    "locale",
+    "localization",
+    "translate",
+    "translation",
+    "localize",
+    "fluent"
+  ],
+  "author": "Caleb Maclennan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alerque/handlebars-helper-fluent/issues"
+  },
+  "homepage": "https://github.com/alerque/handlebars-helper-fluent#readme"
+}
