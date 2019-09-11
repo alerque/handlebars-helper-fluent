@@ -26,6 +26,12 @@
     "localize",
     "fluent"
   ],
+  "dependencies": {
+    "@fluent/bundle": "^0.14.0"
+  },
+  "devDependencies": {
+    "handlebars": "^4.2.0"
+  },
   "author": "Caleb Maclennan",
   "license": "MIT",
   "bugs": {
