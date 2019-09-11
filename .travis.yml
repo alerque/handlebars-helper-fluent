@@ -1,0 +1,6 @@
+language: node_js
+dist: bionic
+before_script:
+  - npm install -d
+script:
+  - npm test
