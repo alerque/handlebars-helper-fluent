@@ -11,6 +11,8 @@ exports.fluent = function (key, options) {
     throw "{{fluent}} helper: invalid key. Keys must be formatted as strings.";
   }
 
+  var [key, attr] = key.split('.', 2);
+
   if (typeof options.hash.language === "string") {
     language = options.hash.language;
   } else {
@@ -38,7 +40,11 @@ exports.fluent = function (key, options) {
 
   try {
     result = bundle.getMessage(key);
-    return result.value;
+    if (typeof attr === "string") {
+      return result.attributes[attr];
+    } else {
+      return result.value;
+    }
   } catch (err) {
     throw "{{fluent}} helper: translation for '" + key + "' is not available for language '" + language + "'.";
   }

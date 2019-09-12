@@ -1,1 +1,2 @@
 key = değeri
+  .attr = özellik

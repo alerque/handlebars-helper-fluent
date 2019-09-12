@@ -14,6 +14,11 @@ describe('fluent helper', function () {
     template(context).should.eql('value');
   });
 
+  it('should take a key with an attribute and return', function () {
+    var template = Handlebars.compile('{{fluent "key.attr"}}');
+    template(context).should.eql('property');
+  });
+
   it('should take a key and return for the override language', function () {
     var template = Handlebars.compile('{{fluent "key" language="tr"}}');
     template(context).should.equal('değeri');
