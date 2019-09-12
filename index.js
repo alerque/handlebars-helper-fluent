@@ -43,3 +43,7 @@ exports.fluent = function (key, options) {
     throw "{{fluent}} helper: translation for '" + key + "' is not available for language '" + language + "'.";
   }
 };
+
+module.exports.register = function(Handlebars) {
+  Handlebars.registerHelper('fluent', exports.fluent);
+};
