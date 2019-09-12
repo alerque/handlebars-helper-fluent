@@ -1,6 +1,6 @@
 {
   "name": "handlebars-helper-fluent",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Fluent based i18n helper for Handlebars",
   "main": "index.js",
   "scripts": {
