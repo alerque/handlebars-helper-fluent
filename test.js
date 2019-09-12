@@ -3,7 +3,8 @@ var Handlebars = require('handlebars');
 var helpers = require('./index');
 
 var context = {
-  language: 'en'
+  language: 'en',
+  name: "Mocha"
 };
 
 Handlebars.registerHelper("fluent", helpers.fluent);
@@ -17,6 +18,11 @@ describe('fluent helper', function () {
   it('should take a key with an attribute and return', function () {
     var template = Handlebars.compile('{{fluent "key.attr"}}');
     template(context).should.eql('property');
+  });
+
+  it('should take a key that uses context data and return', function () {
+    var template = Handlebars.compile('{{fluent "hello"}}');
+    template(context).should.eql('Hello ⁨Mocha⁩!');
   });
 
   it('should take a key and return for the override language', function () {

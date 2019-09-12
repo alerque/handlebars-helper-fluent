@@ -39,12 +39,13 @@ exports.fluent = function (key, options) {
   bundle.addResource(resource);
 
   try {
-    result = bundle.getMessage(key);
+    var message = bundle.getMessage(key);
     if (typeof attr === "string") {
-      return result.attributes[attr];
+      result = message.attributes[attr];
     } else {
-      return result.value;
+      result = message.value;
     }
+    return bundle.formatPattern(result, options.data.root);
   } catch (err) {
     throw "{{fluent}} helper: translation for '" + key + "' is not available for language '" + language + "'.";
   }
