@@ -25,6 +25,11 @@ describe('fluent helper', function () {
     template(context).should.eql('Hello ⁨Mocha⁩!');
   });
 
+  it('should take a key that uses context data and and override value and return', function () {
+    var template = Handlebars.compile('{{fluent "hello" name="World"}}');
+    template(context).should.eql('Hello ⁨World⁩!');
+  });
+
   it('should take a key and return for the override language', function () {
     var template = Handlebars.compile('{{fluent "key" language="tr"}}');
     template(context).should.equal('değeri');
@@ -44,7 +49,7 @@ describe('errors:', function () {
   it('should throw an error when no language is undefined.', function () {
     var template = Handlebars.compile('{{fluent "key"}}');
     try {
-      template({en: {key: 'value'}, fr: {key: 'valeur'} });
+      template({});
     } catch(err) {
       err.should.equal("{{fluent}} helper: the 'language' parameter is not defined.");
     }
@@ -53,7 +58,7 @@ describe('errors:', function () {
   it('should throw an error when the given property is missing.', function () {
     var template = Handlebars.compile('{{fluent "word" language="tr"}}');
     try {
-      template({language: 'en', en: {word: 'value'}, fr: {}});
+      template({language: 'en'});
     } catch(err) {
       err.should.equal("{{fluent}} helper: translation for 'word' is not available for language 'tr'.");
     }

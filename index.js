@@ -2,10 +2,7 @@ var fluent = require("@fluent/bundle");
 var fs = require("fs");
 
 exports.fluent = function (key, options) {
-  options = options || {};
-  options.hash = options.hash || {};
-
-  var language, ftl, result;
+  var language = this.language, ftl = this.ftl, result, context = this;
 
   if (typeof key !== "string") {
     throw "{{fluent}} helper: invalid key. Keys must be formatted as strings.";
@@ -15,8 +12,7 @@ exports.fluent = function (key, options) {
 
   if (typeof options.hash.language === "string") {
     language = options.hash.language;
-  } else {
-    language = this.language;
+    delete options.hash.language;
   }
 
   if (typeof language === "undefined") {
@@ -25,13 +21,14 @@ exports.fluent = function (key, options) {
 
   if (typeof options.hash.ftl === "string") {
     ftl = options.hash.ftl;
-  } else {
-    ftl = this.ftl;
+    delete options.hash.ftl;
   }
 
   if (typeof ftl === "undefined") {
     ftl = language + ".ftl";
   }
+
+  Object.keys(options.hash).forEach(function(k) { context[k] = options.hash[k]; });
 
   var source = fs.readFileSync(ftl).toString();
   var bundle = new fluent.FluentBundle([language]);
@@ -45,7 +42,7 @@ exports.fluent = function (key, options) {
     } else {
       result = message.value;
     }
-    return bundle.formatPattern(result, options.data.root);
+    return bundle.formatPattern(result, context);
   } catch (err) {
     throw "{{fluent}} helper: translation for '" + key + "' is not available for language '" + language + "'.";
   }
