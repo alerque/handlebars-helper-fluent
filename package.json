@@ -27,7 +27,8 @@
     "fluent"
   ],
   "dependencies": {
-    "@fluent/bundle": "^0.14.0"
+    "@fluent/bundle": "^0.14.0",
+    "handlebars-utils": "^1.0.6"
   },
   "devDependencies": {
     "handlebars": "^4.2.0",
