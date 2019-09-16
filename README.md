@@ -32,12 +32,24 @@ var context = {
 };
 
 // Register the helper
-Handlebars.registerHelper("fluent", Fluent.fluent);
+Fluent.register(Handlebars);
 
 // Use the way you would normally use Handlebars
 var template = Handlebars.compile('Hello {{fluent "world"}}!');
 template(context);
 ```
+
+# API
+
+Requires a `lang` parameter to be set in content.
+
+Optionally uses the `ftl` parameter as a filename to read from, defaults to `$lang.ftl`.
+
+* `{{fluent "index"}}` inline helper, take string as the key to lookup in Fluent. Context data may be adjusted with hash values.
+
+* `{{#fluent "index"}}{{/fluent}}` block helper that can contain instances of `fluentparam`.
+
+* `{{#fluentparam "key"}}value{{/fluentparam}}` block helper that can set data values for use its parent context.
 
   [fluent]: https://projectfluent.org/
   [handlebars]: https://handlebarsjs.com/
