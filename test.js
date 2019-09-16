@@ -3,7 +3,7 @@ var Handlebars = require('handlebars');
 var helpers = require('./index');
 
 var context = {
-  language: 'en',
+  lang: 'en',
   name: "Mocha"
 };
 
@@ -32,7 +32,7 @@ describe('fluent helper', function () {
   });
 
   it('should take a key and return for the override language', function () {
-    var template = Handlebars.compile('{{fluent "key" language="tr"}}');
+    var template = Handlebars.compile('{{fluent "key" lang="tr"}}');
     template(context).should.equal('değeri');
   });
 
@@ -50,12 +50,12 @@ describe('errors:', function () {
   it('should throw an error when no language is undefined.', function () {
     (function() {
       Handlebars.compile('{{fluent "key"}}')({});
-    }).should.throw(err+"the 'language' parameter is not defined.");
+    }).should.throw(err+"the 'lang' parameter is not defined.");
   });
 
   it('should throw an error when the given property is missing.', function () {
     (function() {
-      Handlebars.compile('{{{fluent "word" language="tr"}}}')({language: 'tr'});
+      Handlebars.compile('{{{fluent "word" lang="tr"}}}')({lang: 'tr'});
     }).should.throw(err+"translation for 'word' is not available for language 'tr'.");
   });
 

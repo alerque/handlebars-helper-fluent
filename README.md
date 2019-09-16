@@ -15,7 +15,7 @@ $ npm install hbs-cli handlebars-helper-fluent
 
 # Invoke handlebars to output from a template by specifying this plugin plus data
 # about what language and where to find the FTL file
-$ hbs -D '{"language": "en", "ftl": "en.ftl"}' --helper handlebars-helper-fluent -s template.hbs
+$ hbs -D '{"lang": "en", "ftl": "en.ftl"}' --helper handlebars-helper-fluent -s template.hbs
 ```
 
 ## From Javascript
@@ -27,7 +27,7 @@ var Fluent = require('handlebars-helper-fluent');
 
 // Setup data about what language and where to find the FTL file
 var context = {
-  language: 'en',
+  lang: 'en',
   ftl: 'en.ftl'
 };
 
