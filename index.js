@@ -1,11 +1,12 @@
 var fluent = require("@fluent/bundle");
 var fs = require("fs");
+var err = "{{fluent}} helper: ";
 
 exports.fluent = function (key, options) {
   var language = this.language, ftl = this.ftl, result, context = this;
 
   if (typeof key !== "string") {
-    throw "{{fluent}} helper: invalid key. Keys must be formatted as strings.";
+    throw new Error(err+"invalid key. Keys must be formatted as strings.");
   }
 
   var [key, attr] = key.split('.', 2);
@@ -16,7 +17,7 @@ exports.fluent = function (key, options) {
   }
 
   if (typeof language === "undefined") {
-    throw "{{fluent}} helper: the 'language' parameter is not defined.";
+    throw new Error(err+"the 'language' parameter is not defined.");
   }
 
   if (typeof options.hash.ftl === "string") {
@@ -43,8 +44,8 @@ exports.fluent = function (key, options) {
       result = message.value;
     }
     return bundle.formatPattern(result, context);
-  } catch (err) {
-    throw "{{fluent}} helper: translation for '" + key + "' is not available for language '" + language + "'.";
+  } catch (_) {
+    throw new Error(err+"translation for '" + key + "' is not available for language '" + language + "'.");
   }
 };
 
