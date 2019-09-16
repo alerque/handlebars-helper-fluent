@@ -3,9 +3,26 @@ var fluent = require("@fluent/bundle");
 var fs = require("fs");
 var err = "{{fluent}} helper: ";
 
+exports.fluentparam = function (thisArg, locals, options) {
+  options = utils.options(thisArg, locals, options);
+  var context = utils.context(this, locals, options);
+
+  if (utils.isBlock(locals)) {
+    var val = utils.value(thisArg, locals, options);
+    locals.data.root[thisArg] = val;
+  } else {
+    throw new Error(err+"fluentparam can only be called inside a {{fluent}} block")
+  }
+};
+
 exports.fluent = function (thisArg, locals, options) {
   options = utils.options(thisArg, locals, options);
   var context = utils.context(this, locals, options);
+
+  if (utils.isBlock(locals)) {
+    utils.fn(thisArg, locals, options);
+    context = utils.context(this, locals, options);
+  }
 
   if (!utils.isString(thisArg)) {
     throw new Error(err+"invalid key. Keys must be formatted as strings.");
@@ -38,5 +55,6 @@ exports.fluent = function (thisArg, locals, options) {
 };
 
 module.exports.register = function(Handlebars) {
+  Handlebars.registerHelper('fluentparam', exports.fluentparam);
   Handlebars.registerHelper('fluent', exports.fluent);
 };

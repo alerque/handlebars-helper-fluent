@@ -7,7 +7,7 @@ var context = {
   name: "Mocha"
 };
 
-Handlebars.registerHelper("fluent", helpers.fluent);
+helpers.register(Handlebars);
 
 describe('fluent helper', function () {
 
@@ -34,6 +34,15 @@ describe('fluent helper', function () {
   it('should take a key and return for the override language', function () {
     var template = Handlebars.compile('{{fluent "key" lang="tr"}}');
     template(context).should.equal('değeri');
+  });
+
+});
+
+describe('fluent block helper', function () {
+
+  it('should return a value set by {{#fluentparam}}', function () {
+    var template = Handlebars.compile('{{#fluent "hello"}}{{#fluentparam "name"}}My Block{{/fluentparam}}{{/fluent}}');
+    template(context).should.eql('Hello ⁨My Block⁩!');
   });
 
 });
